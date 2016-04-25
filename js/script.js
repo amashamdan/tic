@@ -1,4 +1,6 @@
 $(document).ready(function() {
+	var playerChoice;	
+
 	/* canvas related stuff should be in document ready, or place at the end
 	of the body in index.html */
 	var grid = document.querySelector("#grid");
@@ -20,6 +22,16 @@ $(document).ready(function() {
 	$("#grid").click(function(e) {
 		var x = e.pageX - $("#grid").position().left - 200;
 		var y = e.pageY - $("#grid").position().top;
+
+		ctx.font = "40pt Arial";
+		ctx.textAlign = "center";
+		ctx.fillStyle = "black";
+		ctx.fillText(playerChoice, x, y);
+	})
+
+	$(".choice").click(function() {
+		playerChoice = $(this).attr("id");
+		$(".message").fadeOut();
 	})
 })
 
