@@ -26,6 +26,10 @@ body {
 	color: #013636;
 }
 
+.choice:hover {
+	cursor: pointer;
+}
+
 #X,
 #O {
 	width: 50px;
