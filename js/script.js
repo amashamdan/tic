@@ -25,7 +25,11 @@ $(document).ready(function() {
 
 		ctx.font = "40pt Arial";
 		ctx.textAlign = "center";
-		ctx.fillStyle = "black";
+		if (playerChoice === "X"){
+			ctx.fillStyle = "#851818";
+		} else {
+			ctx.fillStyle = "#013636";
+		}
 		ctx.fillText(playerChoice, x, y);
 	})
 
