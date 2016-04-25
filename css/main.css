@@ -1,0 +1,42 @@
+body {
+	font-family: 'Titillium Web', sans-serif;
+}
+
+.container {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.header {
+	text-align: center;
+	font-size: 1.5em;
+}
+
+.game {
+	display: flex;
+	align-items: center;
+}
+
+#grid {
+	border: 1px solid gray;
+	border-radius: 30px;
+	margin: 0 auto;
+}
+
+.footer {
+	margin-top: 20px;
+}
+
+.author {
+	font-size: 0.8em;
+	color: gray;
+}
+
+.author p {
+	margin: 2px;	
+}
+
+.author a {
+	color: gray;
+}
