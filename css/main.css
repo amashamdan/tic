@@ -26,8 +26,8 @@ body {
 	color: #013636;
 }
 
-#x,
-#o {
+#X,
+#O {
 	width: 50px;
 	height: 40px;
 	margin: 10px;
@@ -37,11 +37,11 @@ body {
 	border: 1px solid white;
 }
 
-#x {
+#X {
 	background-color: #851818;
 }
 
-#o {
+#O {
 	background-color: #013636;
 }
 
