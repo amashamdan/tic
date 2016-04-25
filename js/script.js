@@ -16,5 +16,27 @@ $(document).ready(function() {
 	ctx.lineWidth = 2;
 	ctx.strokeStyle = '#666666';
 	ctx.stroke();
+
+	$("#grid").click(function(e) {
+		var x = e.pageX - $("#grid").position().left - 200;
+		var y = e.pageY - $("#grid").position().top;
+	})
 })
 
+/*
+var x;
+var y;
+if (e.pageX || e.pageY) { 
+  x = e.pageX;
+  y = e.pageY;
+}
+else { 
+  x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
+  y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
+} 
+x -= grid.offsetLeft;
+y -= grid.offsetTop;
+console.log(x);
+console.log(y);
+
+*/
