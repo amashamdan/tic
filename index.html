@@ -3,13 +3,19 @@
 <head>
 	<title>TicTacToe</title>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" src="css/main.css">
+	<link rel="stylesheet" href="css/main.css">
 	<script src="js/jquery.min.js"></script>
 	<script src="js/script.js"></script>	
 </head>
 <body>
 	<div class="container">
+		<div class="header">
+		<h3 class="header">TicTacToe</h3>
+		</div>
 		<div class="game">
+			<!-- Width and height of the canvas SHOULD be specified here not in css,
+			otherwise it will be stretched. -->
+			<canvas id="grid" width="400" height="400"></canvas>
 		</div>
 		<!-- The footer section, contains the author's information and links to pages. -->		
 		<div class="footer">
