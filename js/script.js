@@ -1,6 +1,8 @@
 $(document).ready(function() {
 	var playerChoice;	
-
+	var locations = [[100, 100], [100, 200], [100, 300], 
+					[200, 100], [200, 200], [200, 300],
+					[300, 100], [300, 200], [300, 300]];
 	/* canvas related stuff should be in document ready, or place at the end
 	of the body in index.html */
 	var grid = document.querySelector("#grid");
@@ -20,8 +22,22 @@ $(document).ready(function() {
 	ctx.stroke();
 
 	$("#grid").click(function(e) {
-		var x = e.pageX - $("#grid").position().left - 200;
-		var y = e.pageY - $("#grid").position().top;
+		var clickedX = e.pageX - $("#grid").position().left - 200;
+		var clickedY = e.pageY - $("#grid").position().top;
+
+		for (i in locations){
+			if (Math.abs(locations[i][0] - clickedX) < 50) {
+				var x = locations[i][0];
+				break;
+			}
+		}
+
+		for (i in locations){
+			if (Math.abs(locations[i][1] - clickedY) < 50) {
+				var y = locations[i][1];
+				break;
+			}
+		}
 
 		ctx.font = "40pt Arial";
 		ctx.textAlign = "center";
@@ -30,6 +46,7 @@ $(document).ready(function() {
 		} else {
 			ctx.fillStyle = "#013636";
 		}
+		ctx.textBaseline = "middle";
 		ctx.fillText(playerChoice, x, y);
 	})
 
