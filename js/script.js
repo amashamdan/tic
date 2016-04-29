@@ -45,7 +45,6 @@ $(document).ready(function() {
 			}
 		}
 
-
 		if (playerChoice === "X"){
 			var playerColor = "#851818";
 			var cpuColor = "#013636";
@@ -54,19 +53,22 @@ $(document).ready(function() {
 			var cpuColor = "#851818";
 		}
 
-		ctx.fillStyle = playerColor;
-		ctx.fillText(playerChoice, x, y);
+		//checks if the clicked sqaure already has a letter
+		var indexInLocation = findIndex(locations, [x,y]);
+		if (indexInLocation || indexInLocation === 0){
+			ctx.fillStyle = playerColor;
+			ctx.fillText(playerChoice, x, y);
+			var index = findIndex(locations, [x,y]);
+			playerGrids.push(locations.splice(index, 1));
 
-		var index = findIndex(locations, [x,y]);
-		playerGrids.push(locations.splice(index, 1));
-
-		if (locations.length){
-			index = cpuPlay(locations);
-			ctx.fillStyle = cpuColor;
-			ctx.fillText(cpuChoice, locations[index][0], locations[index][1]);
-			cpuGrids.push(locations.splice(index, 1));
+			if (locations.length){
+				index = cpuPlay(locations);
+				ctx.fillStyle = cpuColor;
+				ctx.fillText(cpuChoice, locations[index][0], locations[index][1]);
+				cpuGrids.push(locations.splice(index, 1));
+			}
 		}
-		
+
 	})
 
 	$(".choice").click(function() {
@@ -81,10 +83,10 @@ $(document).ready(function() {
 })
 
 function findIndex(array, value){
-	for (var i in array){
-		if (value[0] == array[i][0]){
-			if (value[1] == array[i][1]){
-				return i;
+	for (var j = 0; j < array.length; j++){
+		if (value[0] == array[j][0]){
+			if (value[1] == array[j][1]){
+				return j;
 			}
 		}
 	}
@@ -94,20 +96,3 @@ function cpuPlay(locations){
 	var index = Math.floor(Math.random() * locations.length);
 	return index;
 }
-/*
-var x;
-var y;
-if (e.pageX || e.pageY) { 
-  x = e.pageX;
-  y = e.pageY;
-}
-else { 
-  x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
-  y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
-} 
-x -= grid.offsetLeft;
-y -= grid.offsetTop;
-console.log(x);
-console.log(y);
-
-*/
