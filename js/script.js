@@ -23,6 +23,9 @@ $(document).ready(function() {
 	ctx.lineWidth = 2;
 	ctx.strokeStyle = '#666666';
 	ctx.stroke();
+	ctx.font = "40pt Arial";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
 
 	$("#grid").click(function(e) {
 		var clickedX = e.pageX - $("#grid").position().left - 200;
@@ -42,14 +45,16 @@ $(document).ready(function() {
 			}
 		}
 
-		ctx.font = "40pt Arial";
-		ctx.textAlign = "center";
+
 		if (playerChoice === "X"){
-			ctx.fillStyle = "#851818";
+			var playerColor = "#851818";
+			var cpuColor = "#013636";
 		} else {
-			ctx.fillStyle = "#013636";
+			var playerColor = "#013636";;
+			var cpuColor = "#851818";
 		}
-		ctx.textBaseline = "middle";
+
+		ctx.fillStyle = playerColor;
 		ctx.fillText(playerChoice, x, y);
 
 		var index = findIndex(locations, [x,y]);
@@ -57,6 +62,7 @@ $(document).ready(function() {
 
 		if (locations.length){
 			index = cpuPlay(locations);
+			ctx.fillStyle = cpuColor;
 			ctx.fillText(cpuChoice, locations[index][0], locations[index][1]);
 			cpuGrids.push(locations.splice(index, 1));
 		}
