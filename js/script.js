@@ -27,6 +27,14 @@ $(document).ready(function() {
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
 
+	if (playerChoice === "X"){
+			var playerColor = "#851818";
+			var cpuColor = "#013636";
+		} else {
+			var playerColor = "#013636";;
+			var cpuColor = "#851818";
+	}
+
 	$("#grid").click(function(e) {
 		var clickedX = e.pageX - $("#grid").position().left - 200;
 		var clickedY = e.pageY - $("#grid").position().top;
@@ -44,15 +52,7 @@ $(document).ready(function() {
 				break;
 			}
 		}
-
-		if (playerChoice === "X"){
-			var playerColor = "#851818";
-			var cpuColor = "#013636";
-		} else {
-			var playerColor = "#013636";;
-			var cpuColor = "#851818";
-		}
-
+	
 		//checks if the clicked sqaure already has a letter
 		var indexInLocation = findIndex(locations, [x,y]);
 		if (indexInLocation || indexInLocation === 0){
