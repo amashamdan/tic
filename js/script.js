@@ -1,5 +1,8 @@
 $(document).ready(function() {
-	var playerChoice;	
+	var playerChoice;
+	var cpuChoice;
+	var playerGrids = [];
+	var cpuGrids = [];
 	var locations = [[100, 100], [100, 200], [100, 300], 
 					[200, 100], [200, 200], [200, 300],
 					[300, 100], [300, 200], [300, 300]];
@@ -48,14 +51,43 @@ $(document).ready(function() {
 		}
 		ctx.textBaseline = "middle";
 		ctx.fillText(playerChoice, x, y);
+
+		var index = findIndex(locations, [x,y]);
+		playerGrids.push(locations.splice(index, 1));
+
+		if (locations.length){
+			index = cpuPlay(locations);
+			ctx.fillText(cpuChoice, locations[index][0], locations[index][1]);
+			cpuGrids.push(locations.splice(index, 1));
+		}
+		
 	})
 
 	$(".choice").click(function() {
 		playerChoice = $(this).attr("id");
+		if (playerChoice === "X") {
+			cpuChoice = "O";
+		} else {
+			cpuChoice = "X";
+		}
 		$(".message").fadeOut();
 	})
 })
 
+function findIndex(array, value){
+	for (var i in array){
+		if (value[0] == array[i][0]){
+			if (value[1] == array[i][1]){
+				return i;
+			}
+		}
+	}
+}
+
+function cpuPlay(locations){
+	var index = Math.floor(Math.random() * locations.length);
+	return index;
+}
 /*
 var x;
 var y;
