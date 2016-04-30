@@ -69,6 +69,11 @@ $(document).ready(function() {
 			}
 		}
 
+		if (locations.length == 0) {
+			$(".winner").html("It's a tie!");
+			$(".win-message").fadeToggle();
+		}
+
 	})
 
 	$(".choice").click(function() {
@@ -138,13 +143,11 @@ function cpuPlay(locations, playerGrids, cpuGrids){
 	for (var i in playerGrids) {
 		playerTest.push(playerGrids[i]);
 	}
-	console.log(playerGrids.length, cpuGrids.length, cpuGrids);
 	if (playerGrids.length < 2) {
 		var index = Math.floor(Math.random() * locations.length);
 		return index;
 	}
 	if (cpuGrids.length >= 2) {
-		console.log("QQQ");
 		for (var i in locations) {
 			cpuTest.push([locations[i]]);
 			var testResult = checkWin(cpuTest);
@@ -155,7 +158,6 @@ function cpuPlay(locations, playerGrids, cpuGrids){
 		}
 	}
 	if (playerGrids.length >= 2) {
-		console.log("PPP")
 		for (var i in locations) {
 			playerTest.push([locations[i]]);
 			var testResult = checkWin(playerTest);
@@ -252,6 +254,6 @@ function announceWin(winner, winningArray, winWay, ctx, color) {
 		ctx.stroke();
 	}
 
-	$(".winner").html(winner);
+	$(".winner").html("The " + winner + " Won!");
 	$(".win-message").fadeToggle();
 }
