@@ -52,7 +52,7 @@ $(document).ready(function() {
 			}
 
 			if (locations.length){
-				index = cpuPlay(locations);
+				index = cpuPlay(locations, playerGrids, cpuGrids);
 				ctx.fillStyle = cpuColor;
 				ctx.fillText(cpuChoice, locations[index][0], locations[index][1]);
 				cpuGrids.push(locations.splice(index, 1));
@@ -129,9 +129,44 @@ function findIndex(array, value){
 	}
 }
 
-function cpuPlay(locations){
-	var index = Math.floor(Math.random() * locations.length);
-	return index;
+function cpuPlay(locations, playerGrids, cpuGrids){
+	var cpuTest = [];
+	var playerTest = [];
+	for (var i in cpuGrids) {
+		cpuTest.push(cpuGrids[i]);
+	}
+	for (var i in playerGrids) {
+		playerTest.push(playerGrids[i]);
+	}
+	console.log(playerGrids.length, cpuGrids.length, cpuGrids);
+	if (playerGrids.length < 2) {
+		var index = Math.floor(Math.random() * locations.length);
+		return index;
+	}
+	if (cpuGrids.length >= 2) {
+		console.log("QQQ");
+		for (var i in locations) {
+			cpuTest.push([locations[i]]);
+			var testResult = checkWin(cpuTest);
+			if (testResult) {
+				return i;
+			}
+			cpuTest.pop();
+		}
+	}
+	if (playerGrids.length >= 2) {
+		console.log("PPP")
+		for (var i in locations) {
+			playerTest.push([locations[i]]);
+			var testResult = checkWin(playerTest);
+			if (testResult) {
+				return i;
+			}
+			playerTest.pop();
+		}
+	}
+	// if cpu or player won't win, return randomly.
+	return Math.floor(Math.random() * locations.length);
 }
 
 function checkWin(grid){
