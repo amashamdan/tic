@@ -55,11 +55,11 @@ $(document).ready(function() {
 			var index = findIndex(locations, [x,y]);
 			playerGrids.push(locations.splice(index, 1));
 			if (playerGrids.length >= 3){
-				var winningArray = checkWin(playerGrids);
-				if  (winningArray){
-					console.log("Player Won");
-					console.log(winningArray);
-					//announceWin("Player", winningArray, ctx, playerColor);
+				var winStatus = checkWin(playerGrids);
+				if  (winStatus){
+					var winningArray = winStatus[0];
+					var winWay = winStatus[1];
+					announceWin("Player", winningArray, winWay, ctx, playerColor);
 					// MAY NOT BE NEEDED ANYMORE
 					return;
 				}
@@ -71,11 +71,11 @@ $(document).ready(function() {
 				ctx.fillText(cpuChoice, locations[index][0], locations[index][1]);
 				cpuGrids.push(locations.splice(index, 1));
 				if (cpuGrids.length >= 3){
-					var winningArray = checkWin(cpuGrids);
-					if (winningArray){
-						console.log("CPU Won");
-						console.log(winningArray);
-						//announceWin("CPU", winningArray, ctx, cpuColor);
+					var winStatus = checkWin(cpuGrids);
+					if (winStatus){
+						var winningArray = winStatus[0];
+						var winWay = winStatus[1];
+						announceWin("CPU", winningArray, winWay, ctx, cpuColor);
 						// MAY NOT BE NEEDED ANYMORE
 						return;		
 					}
@@ -133,7 +133,7 @@ function checkWin(grid){
 				horizontal++;
 				horElements.push(grid[j][0]);
 				if (horizontal == 3){
-					return horElements;
+					return [[horElements], "horizontal"];
 				}
 			}
 		}
@@ -148,7 +148,7 @@ function checkWin(grid){
 				vertical++;
 				verElements.push(grid[j][0]);
 				if (vertical == 3){
-					return verElements;
+					return [[verElements], "vertical"];
 				}
 			}
 		}
@@ -161,7 +161,7 @@ function checkWin(grid){
 			diagonal++;
 			diaElements.push(grid[i][0]);
 			if (diagonal == 3) {
-				return diaElements;
+				return [[diaElements], "diagonal"];
 			}
 		}
 	}
@@ -173,13 +173,32 @@ function checkWin(grid){
 			(grid[i][0][0] == 100 && grid[i][0][1] == 300)){
 			invDiagonal++;
 			if (invDiagonal == 3){
-				return [[100, 300], [200, 200], [300, 100]];
+				return [[[100, 300], [200, 200], [300, 100]], "invDiagonal"];
 			}
 		}
 	}
 }
-/*
-function announceWin(winner, winningArray, ctx, color) {
+
+function announceWin(winner, winningArray, winWay, ctx, color) {
 	ctx.strokeStyle = color;
-	ctx.fillText("DDDD", 200, 200);
-}*/
+	ctx.lineWidth = 3;
+	ctx.beginPath();
+
+	if (winWay == "horizontal") {	
+		ctx.moveTo(50, winningArray[0][0][1]);
+		ctx.lineTo(350, winningArray[0][0][1]);
+		ctx.stroke();
+	} else if (winWay == "vertical") {
+		ctx.moveTo(winningArray[0][0][0], 50);
+		ctx.lineTo(winningArray[0][0][0], 350);
+		ctx.stroke();		
+	} else if (winWay == "diagonal") {
+		ctx.moveTo(50, 50);
+		ctx.lineTo(350, 350);
+		ctx.stroke();
+	} else if (winWay == "invDiagonal") {
+		ctx.moveTo(350, 50);
+		ctx.lineTo(50, 350);
+		ctx.stroke();
+	}
+}
