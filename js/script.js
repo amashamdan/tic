@@ -1,8 +1,8 @@
 $(document).ready(function() {
 	var playerChoice;
 	var cpuChoice;
-	var playerGrids = [];
-	var cpuGrids = [];
+	var playerGrids = new Array;
+	var cpuGrids = new Array;
 	var locations = [[100, 100], [100, 200], [100, 300], 
 					[200, 100], [200, 200], [200, 300],
 					[300, 100], [300, 200], [300, 300]];
@@ -60,12 +60,18 @@ $(document).ready(function() {
 			ctx.fillText(playerChoice, x, y);
 			var index = findIndex(locations, [x,y]);
 			playerGrids.push(locations.splice(index, 1));
+			if (playerGrids.length >= 3){
+				checkWin(playerGrids);
+			}
 
 			if (locations.length){
 				index = cpuPlay(locations);
 				ctx.fillStyle = cpuColor;
 				ctx.fillText(cpuChoice, locations[index][0], locations[index][1]);
 				cpuGrids.push(locations.splice(index, 1));
+				if (cpuGrids.length >= 3){
+					checkWin(cpuGrids);
+				}
 			}
 		}
 
@@ -95,4 +101,34 @@ function findIndex(array, value){
 function cpuPlay(locations){
 	var index = Math.floor(Math.random() * locations.length);
 	return index;
+}
+
+function checkWin(grid){
+	for (var i in grid) {
+		var horizontal = 1;
+		for (var j in grid){
+			/* NOTE THE EXTRA INDEX WHEN CALLING GRID BELOW, this indicates a three
+			dimensional matrix where we expect two!. This is because splice which is 
+			used to push coordinates into the grid returns an array not an element. */
+			if (j != i && grid[i][0][1] == grid[j][0][1]){
+				horizontal++;
+				if (horizontal == 3){
+					console.log("won");
+					return;
+				}
+			}
+		}
+	}
+	for (var i in grid) {
+		var vertical = 1;
+		for (var j in grid){
+			if (j != i && grid[i][0][0] == grid[j][0][0]){
+				vertical++;
+				if (vertical == 3){
+					console.log("won");
+					return;
+				}
+			}
+		}
+	}
 }
