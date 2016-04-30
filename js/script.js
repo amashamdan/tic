@@ -13,21 +13,7 @@ $(document).ready(function() {
 	var grid = document.querySelector("#grid");
 	var ctx = grid.getContext("2d");
 
-	ctx.beginPath();
-	ctx.moveTo(150, 50);
-	ctx.lineTo(150, 350);
-	ctx.moveTo(250, 50);
-	ctx.lineTo(250, 350);
-	ctx.moveTo(50, 150);
-	ctx.lineTo(350, 150);
-	ctx.moveTo(50, 250);
-	ctx.lineTo(350, 250);
-	ctx.lineWidth = 2;
-	ctx.strokeStyle = '#666666';
-	ctx.stroke();
-	ctx.font = "40pt Arial";
-	ctx.textAlign = "center";
-	ctx.textBaseline = "middle";
+	initializeGrid(ctx);
 
 	$("#grid").click(function(e) {
 		var clickedX = e.pageX - $("#grid").position().left - 200;
@@ -102,7 +88,36 @@ $(document).ready(function() {
 			cpuColor = "#851818";
 		}
 	})
+	
+	$(".new-game").click(function() {
+		$(".win-message").fadeToggle();
+		initializeGrid(ctx);
+		locations = [[100, 100], [100, 200], [100, 300], 
+					[200, 100], [200, 200], [200, 300],
+					[300, 100], [300, 200], [300, 300]];
+		playerGrids = [];
+		cpuGrids = [];
+	})
 })
+
+function initializeGrid(ctx) {
+	ctx.clearRect(0, 0, 400, 400);
+	ctx.beginPath();
+	ctx.moveTo(150, 50);
+	ctx.lineTo(150, 350);
+	ctx.moveTo(250, 50);
+	ctx.lineTo(250, 350);
+	ctx.moveTo(50, 150);
+	ctx.lineTo(350, 150);
+	ctx.moveTo(50, 250);
+	ctx.lineTo(350, 250);
+	ctx.lineWidth = 2;
+	ctx.strokeStyle = '#666666';
+	ctx.stroke();
+	ctx.font = "40pt Arial";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
+}
 
 function findIndex(array, value){
 	for (var j = 0; j < array.length; j++){
@@ -201,4 +216,7 @@ function announceWin(winner, winningArray, winWay, ctx, color) {
 		ctx.lineTo(50, 350);
 		ctx.stroke();
 	}
+
+	$(".winner").html(winner);
+	$(".win-message").fadeToggle();
 }
