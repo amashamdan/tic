@@ -104,6 +104,7 @@ function cpuPlay(locations){
 }
 
 function checkWin(grid){
+	// Row win (three points with same y cooridnate)
 	for (var i in grid) {
 		var horizontal = 1;
 		for (var j in grid){
@@ -113,21 +114,46 @@ function checkWin(grid){
 			if (j != i && grid[i][0][1] == grid[j][0][1]){
 				horizontal++;
 				if (horizontal == 3){
-					console.log("won");
+					console.log("row won");
 					return;
 				}
 			}
 		}
 	}
+	// Colomn win (three points with same x coordinate)
 	for (var i in grid) {
 		var vertical = 1;
 		for (var j in grid){
 			if (j != i && grid[i][0][0] == grid[j][0][0]){
 				vertical++;
 				if (vertical == 3){
-					console.log("won");
+					console.log("colomn won");
 					return;
 				}
+			}
+		}
+	}
+	// Diagonal win
+	var diagonal = 0;
+	for (var i in grid){
+		if (grid[i][0][0] == grid[i][0][1]) {
+			diagonal++;
+			if (diagonal == 3) {
+				console.log("diagonal win");
+				return;
+			}
+		}
+	}
+	// invDiagonal win
+	var invDiagonal = 0;
+	for (var i in grid){
+		if ((grid[i][0][0] == 200 && grid[i][0][1] == 200) ||
+			(grid[i][0][0] == 300 && grid[i][0][1] == 100) ||
+			(grid[i][0][0] == 100 && grid[i][0][1] == 300)){
+			invDiagonal++;
+			if (invDiagonal == 3){
+				console.log("invDiagonal win");
+				return;
 			}
 		}
 	}
