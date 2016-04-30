@@ -4,25 +4,33 @@
 	<title>TicTacToe</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/main.css">
+	<!-- A call to google fonts. -->
 	<link href='https://fonts.googleapis.com/css?family=Titillium+Web' rel='stylesheet' type='text/css'>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/script.js"></script>	
 </head>
 <body>
+	<!-- This is the message the user sees upon loading the page, it asks the player to choose X or O. It fades out once the player makes a choice. -->
 	<div class="message">
 		<p class="message-text">Do you want to play as <span class="red">X</span> or <span class="green">O</span>?</p>
+		<!-- These are the X and O buttons -->
 		<button class="choice" id="X">X</button>
 		<button class="choice" id="O">O</button> 
 	</div>
+	<!-- This is the message that shows the result of the game. It fades in once the game is over, fades out if the user clicks on New Game button.-->
 	<div class="win-message">
 		<p class="win-message-text"><span class="winner"></span><br/>
 		Click on the button below when you are ready to start a new game.</p>
+		<!-- The new game button. -->
 		<button class="new-game">New Game</button>
 	</div>
+	<!-- The container div, it includes the canvas and the footer section. -->
 	<div class="container">
+		<!-- Header section showing the title of the page. -->
 		<div class="header">
-		<h3 class="header">TicTacToe</h3>
+			<h3 class="header">TicTacToe</h3>
 		</div>
+		<!-- This div has the canvas where all the action is happening. -->
 		<div class="game">
 			<!-- Width and height of the canvas SHOULD be specified here not in css,
 			otherwise it will be stretched. -->
