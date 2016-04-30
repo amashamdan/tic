@@ -1,6 +1,8 @@
 $(document).ready(function() {
 	var playerChoice;
 	var cpuChoice;
+	var playerColor;
+	var cpuColor;
 	var playerGrids = new Array;
 	var cpuGrids = new Array;
 	var locations = [[100, 100], [100, 200], [100, 300], 
@@ -26,14 +28,6 @@ $(document).ready(function() {
 	ctx.font = "40pt Arial";
 	ctx.textAlign = "center";
 	ctx.textBaseline = "middle";
-
-	if (playerChoice === "X"){
-			var playerColor = "#851818";
-			var cpuColor = "#013636";
-		} else {
-			var playerColor = "#013636";;
-			var cpuColor = "#851818";
-	}
 
 	$("#grid").click(function(e) {
 		var clickedX = e.pageX - $("#grid").position().left - 200;
@@ -65,6 +59,8 @@ $(document).ready(function() {
 				if  (winningArray){
 					console.log("Player Won");
 					console.log(winningArray);
+					//announceWin("Player", winningArray, ctx, playerColor);
+					// MAY NOT BE NEEDED ANYMORE
 					return;
 				}
 			}
@@ -79,6 +75,8 @@ $(document).ready(function() {
 					if (winningArray){
 						console.log("CPU Won");
 						console.log(winningArray);
+						//announceWin("CPU", winningArray, ctx, cpuColor);
+						// MAY NOT BE NEEDED ANYMORE
 						return;		
 					}
 				}
@@ -95,6 +93,14 @@ $(document).ready(function() {
 			cpuChoice = "X";
 		}
 		$(".message").fadeOut();
+
+		if (playerChoice == "X"){
+			playerColor = "#851818";
+			cpuColor = "#013636";
+		} else {
+			playerColor = "#013636";;
+			cpuColor = "#851818";
+		}
 	})
 })
 
@@ -172,3 +178,8 @@ function checkWin(grid){
 		}
 	}
 }
+/*
+function announceWin(winner, winningArray, ctx, color) {
+	ctx.strokeStyle = color;
+	ctx.fillText("DDDD", 200, 200);
+}*/
