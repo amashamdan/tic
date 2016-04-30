@@ -61,7 +61,12 @@ $(document).ready(function() {
 			var index = findIndex(locations, [x,y]);
 			playerGrids.push(locations.splice(index, 1));
 			if (playerGrids.length >= 3){
-				checkWin(playerGrids);
+				var winningArray = checkWin(playerGrids);
+				if  (winningArray){
+					console.log("Player Won");
+					console.log(winningArray);
+					return;
+				}
 			}
 
 			if (locations.length){
@@ -70,7 +75,12 @@ $(document).ready(function() {
 				ctx.fillText(cpuChoice, locations[index][0], locations[index][1]);
 				cpuGrids.push(locations.splice(index, 1));
 				if (cpuGrids.length >= 3){
-					checkWin(cpuGrids);
+					var winningArray = checkWin(cpuGrids);
+					if (winningArray){
+						console.log("CPU Won");
+						console.log(winningArray);
+						return;		
+					}
 				}
 			}
 		}
@@ -107,15 +117,17 @@ function checkWin(grid){
 	// Row win (three points with same y cooridnate)
 	for (var i in grid) {
 		var horizontal = 1;
+		var horElements = [];
+		horElements.push(grid[i][0]);
 		for (var j in grid){
 			/* NOTE THE EXTRA INDEX WHEN CALLING GRID BELOW, this indicates a three
 			dimensional matrix where we expect two!. This is because splice which is 
 			used to push coordinates into the grid returns an array not an element. */
 			if (j != i && grid[i][0][1] == grid[j][0][1]){
 				horizontal++;
+				horElements.push(grid[j][0]);
 				if (horizontal == 3){
-					console.log("row won");
-					return;
+					return horElements;
 				}
 			}
 		}
@@ -123,24 +135,27 @@ function checkWin(grid){
 	// Colomn win (three points with same x coordinate)
 	for (var i in grid) {
 		var vertical = 1;
+		var verElements = [];
+		verElements.push(grid[i][0]);
 		for (var j in grid){
 			if (j != i && grid[i][0][0] == grid[j][0][0]){
 				vertical++;
+				verElements.push(grid[j][0]);
 				if (vertical == 3){
-					console.log("colomn won");
-					return;
+					return verElements;
 				}
 			}
 		}
 	}
 	// Diagonal win
 	var diagonal = 0;
+	var diaElements = [];
 	for (var i in grid){
 		if (grid[i][0][0] == grid[i][0][1]) {
 			diagonal++;
+			diaElements.push(grid[i][0]);
 			if (diagonal == 3) {
-				console.log("diagonal win");
-				return;
+				return diaElements;
 			}
 		}
 	}
@@ -152,8 +167,7 @@ function checkWin(grid){
 			(grid[i][0][0] == 100 && grid[i][0][1] == 300)){
 			invDiagonal++;
 			if (invDiagonal == 3){
-				console.log("invDiagonal win");
-				return;
+				return [[100, 300], [200, 200], [300, 100]];
 			}
 		}
 	}
