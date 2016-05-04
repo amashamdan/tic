@@ -10,6 +10,6 @@ Once page is loaded, the user is asked to select X or O. The goal of the game is
 
 Once the game is over, a message is displayed anouncing the results. To start a new game, click on "New Game" button.
 
-The level of the game is intermediate, the CPU thinks one step ahead and tries to prevent the user from winning. The CPU plays randomly when the next move wouldn't produce a win or wouldn't prevent the user from winning.
+The level of the game is difficult, the CPU thinks ahead and tries to prevent the user from winning. Good luck trying to beat the computer!.
 
 Enjoy!
