@@ -98,6 +98,7 @@ $(document).ready(function() {
 				/* cpuPlay is called and return the index in locations of the square
 				where the cpu will place its letter. */
 				index = cpuPlay(locations, playerGrids, cpuGrids);
+
 				/* The remainder is the same as what happens in player's case above.
 				MAYBE REFACTOR A BIT! */
 				ctx.fillStyle = cpuColor;
@@ -222,10 +223,18 @@ function cpuPlay(locations, playerGrids, cpuGrids){
 		playerTest.push(playerGrids[i]);
 	}
 
-	/* First, if the player has less than two letters places (only one), the CPU
-	index is chosen randomly.. */
+	/* First, if the player has less than two letters places (only one): */
 	if (playerGrids.length < 2) {
-		var index = Math.floor(Math.random() * locations.length);
+		/* The middle square is looked up in locations. */
+		var middleInLocations = findIndex(locations, [200, 200]); 
+		/* If the middlw square is available, its index in locations is returned and
+		the CPU occupies the middle square in the grid. */
+		if (middleInLocations){
+			var index =  findIndex(locations, [200, 200]);
+		/* If the player occupied the middle square, a random index is generated. */
+		} else {
+			var index = Math.floor(Math.random() * locations.length);
+		}
 		return index;
 	}
 
