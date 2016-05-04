@@ -27,9 +27,11 @@ $(document).ready(function() {
 	$("#grid").click(function(e) {
 		/* The next two lines store the location of the mouse click relative to the
 		location of the grid. This is needed to properly place a letter on the grid
-		when a square is clicked. */
-		var clickedX = e.pageX - $("#grid").position().left - 200;
-		var clickedY = e.pageY - $("#grid").position().top;
+		when a square is clicked.
+		offset() Get the current coordinates of the first element in the set of 
+		matched elements, relative to the document.*/
+		var clickedX = e.pageX - $("#grid").offset().left;
+		var clickedY = e.pageY - $("#grid").offset().top;
 
 		/* The following for loop specifies the x coordinate of the point where the
 		letter should be placed. We don't want to place the letter exactly where the
